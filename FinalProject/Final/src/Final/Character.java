@@ -24,7 +24,8 @@ public class Character {
 	}
 	
 	public void StartCharacter() {
-		values();
+		valuesSet();
+		deckbuild();
 	}
 	
 	public String[] deck;
@@ -56,7 +57,7 @@ public class Character {
 	}
 	
 	private int[] values = new int[6];
-	private void values() {
+	private void valuesSet() {
 	values[0] = 0;
 	values[1] = 0;
 	values[2] = 0;

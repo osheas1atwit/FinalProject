@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -28,10 +29,10 @@ public class Map extends Application{
 
 		gameplay.setWidth(1920); gameplay.setHeight(1080);
 		
-		Image splashView = new Image(new FileInputStream("assets/menu/menuSplash.png"));
+		Image splashView = new Image(new FileInputStream("FinalProject/assets/menu/menuSplash.png"));
 			ImageView splash = new ImageView(splashView);
 			
-		Image playView = new Image(new FileInputStream("assets/menu/playButton.png"));
+		Image playView = new Image(new FileInputStream("FinalProject/assets/menu/playButton.png"));
 			ImageView play = new ImageView(playView);
 			play.setOnMouseClicked(new EventHandler <MouseEvent>(){
 				
@@ -50,7 +51,7 @@ public class Map extends Application{
 			});
 			
 			
-		Image quitView = new Image(new FileInputStream("assets/menu/quitButton.png"));
+		Image quitView = new Image(new FileInputStream("FinalProject/assets/menu/quitButton.png"));
 			ImageView quit = new ImageView(quitView);
 			quit.setOnMouseClicked(new EventHandler <MouseEvent>(){
 				
@@ -87,17 +88,18 @@ public class Map extends Application{
 	
 	public Scene bonfire() throws FileNotFoundException{
 		
-		Image starsView = new Image(new FileInputStream("assets/scenes/bonfire.png"));
+		Image starsView = new Image(new FileInputStream("FinalProject/assets/scenes/bonfire.png"));
 			ImageView stars = new ImageView(starsView);
 			
-		Image yesRestView = new Image(new FileInputStream("assets/scenes/yesRest.png"));
+		Image yesRestView = new Image(new FileInputStream("FinalProject/assets/scenes/yesRest.png"));
 			ImageView yesRest = new ImageView(yesRestView);
 			
 		yesRest.setOnMouseClicked(new EventHandler <MouseEvent>(){
-				
+			
 			@Override
 			public void handle(MouseEvent click) {
 					background.BonfireHeal();
+					background.StageIncrease();
 					try {
 						Scene map = map();
 						gameplay.setScene(map);
@@ -108,16 +110,18 @@ public class Map extends Application{
 				}
 		});
 			
-		Image noRestView = new Image(new FileInputStream("assets/scenes/noRest.png"));
+		Image noRestView = new Image(new FileInputStream("FinalProject/assets/scenes/noRest.png"));
 			ImageView noRest = new ImageView(noRestView);
 		
 			noRest.setOnMouseClicked(new EventHandler <MouseEvent>(){
 				
 				@Override
 				public void handle(MouseEvent click) {
+					background.StageIncrease();
 					try {
-						Scene map = map();
-						gameplay.setScene(map);
+						Scene arena = arena();
+						gameplay.setScene(arena);
+						
 					} catch (FileNotFoundException e) {
 						System.out.println("IMAGE NOT FOUND");
 						System.exit(0);
@@ -147,10 +151,10 @@ public class Map extends Application{
 	
 	public Scene map() throws FileNotFoundException{
 		
-		Image paperView = new Image(new FileInputStream("assets/scenes/map.png"));
+		Image paperView = new Image(new FileInputStream("FinalProject/assets/scenes/map.png"));
 		ImageView paper = new ImageView(paperView);
 	
-		Image enemyView = new Image(new FileInputStream("assets/scenes/fightIcon.png"));
+		Image enemyView = new Image(new FileInputStream("FinalProject/assets/scenes/fightIcon.png"));
 			ImageView enemy1 = new ImageView(enemyView);
 				enemy1.setOnMouseClicked(new EventHandler <MouseEvent>(){
 					
@@ -239,7 +243,7 @@ public class Map extends Application{
 				boss.setFitHeight(250);
 				boss.setFitWidth(250);
 
-		Image bonfireView = new Image(new FileInputStream("assets/scenes/fireIcon.png"));
+		Image bonfireView = new Image(new FileInputStream("FinalProject/assets/scenes/fireIcon.png"));
 			ImageView bonfireIcon = new ImageView(bonfireView);
 			bonfireIcon.setOnMouseClicked(new EventHandler <MouseEvent>(){
 				
@@ -257,7 +261,7 @@ public class Map extends Application{
 				
 			});
 			
-		Image arrowView = new Image(new FileInputStream("assets/scenes/arrowMap.png"));
+		Image arrowView = new Image(new FileInputStream("FinalProject/assets/scenes/arrowMap.png"));
 			ImageView arrow  = new ImageView(arrowView);
 			ImageView arrow1 = new ImageView(arrowView);
 			ImageView arrow2 = new ImageView(arrowView);
@@ -295,21 +299,27 @@ public class Map extends Application{
 	
 	public Scene arena() throws FileNotFoundException{
 		
-		Image arenaSplashView = new Image(new FileInputStream("assets/scenes/combat.png"));
-			ImageView arenaSplash = new ImageView(arenaSplashView);
-			
-		Image ironCladView = new Image(new FileInputStream("assets/characters/ironClad.png"));
-			ImageView ironClad = new ImageView(ironCladView);
-		
-		
-		
-		StackPane arenaBackground = new StackPane();
-			arenaBackground.getChildren().add(arenaSplash);
-			arenaBackground.getChildren().add(ironClad);
-	
-		
-		Scene arena = new Scene(arenaBackground, 1920, 1080);
-		return arena;
+		Image arenaSplashView = new Image(new FileInputStream("FinalProject/assets/scenes/combat.png"));
+        ImageView arenaSplash = new ImageView(arenaSplashView);
+        
+    Image ironCladView = new Image(new FileInputStream("FinalProject/assets/characters/ironClad.png"));
+        ImageView ironClad = new ImageView(ironCladView);
+        
+    Image endTurnView = new Image(new FileInputStream("FinalProject/assets/scenes/endTurn.png"));
+        ImageView endTurn = new ImageView(endTurnView);
+    
+    
+    Pane endButton = new Pane();
+        endButton.getChildren().add(endTurn);
+    
+    StackPane arenaBackground = new StackPane();
+        arenaBackground.getChildren().add(arenaSplash);
+        arenaBackground.getChildren().add(ironClad);
+        arenaBackground.getChildren().add(endButton);
+
+    
+    Scene arena = new Scene(arenaBackground, 1920, 1080);
+    return arena;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////

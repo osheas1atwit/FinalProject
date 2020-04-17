@@ -113,17 +113,17 @@ public class Battle extends Enemies{
 	public void SinglePlay(String name, int index, int enemyindex) { //on button press after TestMana
 		int[] stats = Values(name);
 		if(enemyindex == 1) {
-			first.health -= stats[1] - player.strength + first.vulnerable;
+			first.health -= stats[1] - player.strength + first.vulnerable - player.weak;
 			first.vulnerable += stats[4];
 			first.weak += stats[5];
 		}
 		if(enemyindex == 2) {
-			second.health -= stats[1] - player.strength + second.vulnerable;
+			second.health -= stats[1] - player.strength + second.vulnerable - player.weak;
 			second.vulnerable += stats[4];
 			second.weak += stats[5];
 		}
 		if(enemyindex == 3) {
-			third.health -= stats[1] - player.strength + third.vulnerable;
+			third.health -= stats[1] - player.strength + third.vulnerable - player.weak;
 			third.vulnerable += stats[4];
 			third.weak += stats[5];
 		}
@@ -148,7 +148,7 @@ public class Battle extends Enemies{
 		int[] thirdvalues = new int[5];
 		if(enemies.length == 1) {
 			firstvalues = DamageValues(enemies[0]);
-			player.health -= firstvalues[0] - first.strength + player.vulnerable;
+			player.health -= firstvalues[0] - first.strength + player.vulnerable - first.weak;
 			first.shield += firstvalues[1];
 			first.strength += firstvalues[2];
 			player.vulnerable += firstvalues[3];
@@ -157,12 +157,12 @@ public class Battle extends Enemies{
 		if(enemies.length == 2) {
 			firstvalues = DamageValues(enemies[0]);
 			secondvalues = DamageValues(enemies[1]);
-			player.health -= firstvalues[0] - first.strength + player.vulnerable;
+			player.health -= firstvalues[0] - first.strength + player.vulnerable - first.weak;
 			first.shield += firstvalues[1];
 			first.strength += firstvalues[2];
 			player.vulnerable += firstvalues[3];
 			player.weak += firstvalues[4];
-			player.health -= secondvalues[0] - second.strength + player.vulnerable;
+			player.health -= secondvalues[0] - second.strength + player.vulnerable - second.weak;
 			second.shield += secondvalues[1];
 			second.strength += secondvalues[2];
 			player.vulnerable += secondvalues[3];
@@ -172,17 +172,17 @@ public class Battle extends Enemies{
 			firstvalues = DamageValues(enemies[0]);
 			secondvalues = DamageValues(enemies[1]);
 			thirdvalues = DamageValues(enemies[2]);
-			player.health -= firstvalues[0] - first.strength + player.vulnerable;
+			player.health -= firstvalues[0] - first.strength + player.vulnerable - first.weak;
 			first.shield += firstvalues[1];
 			first.strength += firstvalues[2];
 			player.vulnerable += firstvalues[3];
 			player.weak += firstvalues[4];
-			player.health -= secondvalues[0] - second.strength + player.vulnerable;
+			player.health -= secondvalues[0] - second.strength + player.vulnerable - second.weak;
 			second.shield += secondvalues[1];
 			second.strength += secondvalues[2];
 			player.vulnerable += secondvalues[3];
 			player.weak += secondvalues[4];
-			player.health -= thirdvalues[0] - third.strength + player.vulnerable;
+			player.health -= thirdvalues[0] - third.strength + player.vulnerable - third.weak;
 			third.shield += thirdvalues[1];
 			third.strength += thirdvalues[2];
 			player.vulnerable += thirdvalues[3];
